@@ -6,10 +6,15 @@
     <style>
         body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; }
         #gc-schedule-widget-s3gt { width:100% !important; height:100% !important; }
+        #exit-btn {
+            position: fixed; bottom: 20px; left: 20px; background: rgba(80,80,80,0.9); color: white; border: none;
+            padding: 10px 16px; border-radius: 30px; font-size: 15px; z-index: 999999; cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div id="gc-schedule-widget-s3gt"></div>
+    <button id="exit-btn" onclick="exitKiosk()">Exit to Desktop</button>
 
     <script src="https://widgets.gc.com/static/js/sdk.v1.js"></script>
     <script>
@@ -18,6 +23,16 @@
             widgetId: "87a03322-bc62-45e4-aa6e-f2cc4310c481",
             maxVerticalGamesVisible: 4
         });
+
+        // Keep button visible
+        setInterval(() => {
+            document.getElementById('exit-btn').style.display = 'block';
+        }, 500);
+
+        function exitKiosk() {
+            window.location.href = 'file:///home/ash7631/Desktop/index.html'; // fallback
+            // Or simply minimize: window.open('','_self').close(); but better to use desktop
+        }
     </script>
 </body>
 </html>
