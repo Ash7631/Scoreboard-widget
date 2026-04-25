@@ -39,13 +39,8 @@
         }, 500);
 
         function exitKiosk() {
-            // Stronger methods to break out of kiosk
-            window.open('', '_self').close();
-            window.location.href = 'about:blank';
-            // Extra force
-            setTimeout(() => {
-                window.location.href = 'about:blank';
-            }, 100);
+            // This tells the Pi to kill the browser and return to desktop
+            window.location.href = "http://127.0.0.1:5003/exit";
         }
     </script>
 </body>
