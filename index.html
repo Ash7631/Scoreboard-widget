@@ -39,8 +39,13 @@
         }, 500);
 
         function exitKiosk() {
-            // Best method for kiosk mode on Raspberry Pi
-            window.location.href = "about:blank";
+            // Stronger methods to break out of kiosk
+            window.open('', '_self').close();
+            window.location.href = 'about:blank';
+            // Extra force
+            setTimeout(() => {
+                window.location.href = 'about:blank';
+            }, 100);
         }
     </script>
 </body>
