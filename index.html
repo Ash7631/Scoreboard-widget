@@ -7,7 +7,7 @@
         body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; font-family:Arial; }
         #setup, #widget { position:absolute; top:0; left:0; width:100%; height:100%; }
         #setup { background:#111; display:flex; align-items:center; justify-content:center; flex-direction:column; color:white; }
-        input { width:80%; max-width:500px; padding:15px; font-size:18px; margin:20px 0; }
+        input { width:80%; max-width:500px; padding:15px; font-size:22px; margin:20px 0; }
         button { padding:15px 30px; font-size:18px; background:#0066cc; color:white; border:none; border-radius:8px; cursor:pointer; }
         #exit-btn {
             position: fixed; bottom: 25px; left: 25px; background: rgba(80,80,80,0.95); color: white; 
@@ -35,13 +35,12 @@
     <script>
         const savedId = localStorage.getItem('widgetId');
 
-        // Pre-fill the input if we have a saved ID
+        // Pre-fill saved ID
         if (savedId) {
             document.getElementById('widgetInput').value = savedId;
         }
 
         if (savedId) {
-            // Auto-load widget if we already have an ID
             document.getElementById('setup').style.display = 'none';
             document.getElementById('widget').style.display = 'block';
             loadWidget(savedId);
@@ -49,13 +48,13 @@
 
         function saveAndStart() {
             const id = document.getElementById('widgetInput').value.trim();
-            if (id.length > 10) {   // basic validation
+            if (id.length > 20) {                    // More relaxed check
                 localStorage.setItem('widgetId', id);
                 document.getElementById('setup').style.display = 'none';
                 document.getElementById('widget').style.display = 'block';
                 loadWidget(id);
             } else {
-                alert("Please enter a valid Widget ID");
+                alert("Please enter a valid Widget ID (it's a long code from GameChanger)");
             }
         }
 
