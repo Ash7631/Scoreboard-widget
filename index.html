@@ -7,13 +7,18 @@
         body, html { margin:0; padding:0; height:100%; background:black; font-family:Arial; }
         
         #setup { 
-            position:absolute; top:15%; left:10%; width:80%; height:60%; 
-            background:#222; border-radius:20px; display:flex; 
+            position:absolute; top:10%; left:8%; width:84%; height:55%; 
+            background:#1f1f1f; border-radius:20px; display:flex; 
             flex-direction:column; align-items:center; justify-content:center; color:white;
             box-shadow: 0 0 40px rgba(0,0,0,0.9);
         }
-        input { width:85%; padding:20px; font-size:22px; margin:20px 0; border-radius:10px; }
-        button { padding:20px 40px; font-size:20px; background:#0066cc; color:white; border:none; border-radius:10px; cursor:pointer; margin-top:10px; }
+        input { 
+            width:85%; padding:22px; font-size:24px; margin:25px 0; border-radius:10px; 
+        }
+        button { 
+            padding:18px 40px; font-size:20px; background:#0066cc; color:white; 
+            border:none; border-radius:10px; cursor:pointer; margin-top:10px; 
+        }
 
         #widget { position:absolute; top:0; left:0; width:100%; height:100%; display:none; }
         #exit-btn {
@@ -26,9 +31,9 @@
 
     <div id="setup">
         <h1>Scoreboard Setup</h1>
-        <p>Paste Widget ID below:</p>
-        <input type="text" id="widgetInput" placeholder="Paste ID here">
-        <button onclick="saveAndStart()">Save & Start</button>
+        <p>Paste your GameChanger Widget ID:</p>
+        <input type="text" id="widgetInput" placeholder="87a03322-bc62-45e4-aa6e-f2cc4310c481">
+        <button onclick="saveAndStart()">Save & Start Scoreboard</button>
     </div>
 
     <div id="widget">
@@ -39,7 +44,9 @@
     <script src="https://widgets.gc.com/static/js/sdk.v1.js"></script>
     <script>
         const savedId = localStorage.getItem('widgetId');
-        if (savedId) document.getElementById('widgetInput').value = savedId;
+        if (savedId) {
+            document.getElementById('widgetInput').value = savedId;
+        }
 
         if (savedId) {
             startWidget(savedId);
@@ -47,11 +54,11 @@
 
         function saveAndStart() {
             const id = document.getElementById('widgetInput').value.trim();
-            if (id.length > 10) {
+            if (id.length > 15) {
                 localStorage.setItem('widgetId', id);
                 startWidget(id);
             } else {
-                alert("Please paste a valid Widget ID");
+                alert("Widget ID looks too short. Please paste the full code from GameChanger.");
             }
         }
 
@@ -60,12 +67,14 @@
             document.getElementById('widget').style.display = 'block';
             window.GC.team.schedule.init({
                 target: "#gc-schedule-widget-s3gt",
-                widgetId: id
+                widgetId: id,
+                maxVerticalGamesVisible: 4
             });
         }
 
         function exitKiosk() {
             window.open('', '_self').close();
+            window.location.href = 'about:blank';
         }
     </script>
 </body>
