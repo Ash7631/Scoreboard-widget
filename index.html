@@ -17,15 +17,12 @@
 
     <script src="https://widgets.gc.com/static/js/sdk.v1.js"></script>
     <script>
-        let widgetId = localStorage.getItem('widgetId');
-        if (!widgetId) {
-            // First time - use default or prompt user to go to Change Team
-            widgetId = "87a03322-bc62-45e4-aa6e-f2cc4310c481";
-        }
+        let widgetId = localStorage.getItem('widgetId') || "87a03322-bc62-45e4-aa6e-f2cc4310c481";
 
         window.GC.team.schedule.init({
             target: "#gc-schedule-widget-s3gt",
-            widgetId: widgetId
+            widgetId: widgetId,
+            maxVerticalGamesVisible: 4
         });
 
         function exitKiosk() {
