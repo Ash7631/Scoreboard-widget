@@ -17,7 +17,11 @@
 
     <script src="https://widgets.gc.com/static/js/sdk.v1.js"></script>
     <script>
-        let widgetId = localStorage.getItem('widgetId') || "87a03322-bc62-45e4-aa6e-f2cc4310c481";
+        let widgetId = localStorage.getItem('widgetId');
+
+        if (!widgetId) {
+            widgetId = "87a03322-bc62-45e4-aa6e-f2cc4310c481"; // default only if nothing saved
+        }
 
         window.GC.team.schedule.init({
             target: "#gc-schedule-widget-s3gt",
