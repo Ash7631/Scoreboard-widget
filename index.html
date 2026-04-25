@@ -2,73 +2,41 @@
 <html>
 <head>
     <title>Scoreboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; font-family:Arial; }
-        #setup, #widget { position:absolute; top:0; left:0; width:100%; height:100%; }
-        #setup { background:#111; display:flex; align-items:center; justify-content:center; flex-direction:column; color:white; }
-        input { width:80%; max-width:500px; padding:15px; font-size:22px; margin:20px 0; }
-        button { padding:15px 30px; font-size:18px; background:#0066cc; color:white; border:none; border-radius:8px; cursor:pointer; }
+        body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; }
+        #gc-schedule-widget-s3gt { width:100% !important; height:100% !important; }
         #exit-btn {
             position: fixed; bottom: 25px; left: 25px; background: rgba(80,80,80,0.95); color: white; 
+            border: none; padding: 12px 20px; border-radius: 30px; font-size: 16px; z-index: 999999; cursor: pointer;
+        }
+        #change-team {
+            position: fixed; bottom: 25px; right: 25px; background: rgba(0,100,200,0.95); color: white; 
             border: none; padding: 12px 20px; border-radius: 30px; font-size: 16px; z-index: 999999; cursor: pointer;
         }
     </style>
 </head>
 <body>
-
-    <!-- Setup Screen -->
-    <div id="setup">
-        <h1>Scoreboard Setup</h1>
-        <p>Paste your GameChanger Widget ID:</p>
-        <input type="text" id="widgetInput" placeholder="87a03322-bc62-45e4-aa6e-f2cc4310c481">
-        <button onclick="saveAndStart()">Save & Start Scoreboard</button>
-    </div>
-
-    <!-- Widget Screen -->
-    <div id="widget" style="display:none;">
-        <div id="gc-schedule-widget-s3gt"></div>
-        <button id="exit-btn" onclick="exitKiosk()">Exit to Desktop</button>
-    </div>
+    <div id="gc-schedule-widget-s3gt"></div>
+    <button id="exit-btn" onclick="exitKiosk()">Exit to Desktop</button>
+    <button id="change-team" onclick="goToChangeTeam()">Change Team</button>
 
     <script src="https://widgets.gc.com/static/js/sdk.v1.js"></script>
     <script>
-        const savedId = localStorage.getItem('widgetId');
+        const widgetId = localStorage.getItem('widgetId') || "87a03322-bc62-45e4-aa6e-f2cc4310c481";
 
-        // Pre-fill saved ID
-        if (savedId) {
-            document.getElementById('widgetInput').value = savedId;
-        }
-
-        if (savedId) {
-            document.getElementById('setup').style.display = 'none';
-            document.getElementById('widget').style.display = 'block';
-            loadWidget(savedId);
-        }
-
-        function saveAndStart() {
-            const id = document.getElementById('widgetInput').value.trim();
-            if (id.length > 20) {                    // More relaxed check
-                localStorage.setItem('widgetId', id);
-                document.getElementById('setup').style.display = 'none';
-                document.getElementById('widget').style.display = 'block';
-                loadWidget(id);
-            } else {
-                alert("Please enter a valid Widget ID (it's a long code from GameChanger)");
-            }
-        }
-
-        function loadWidget(id) {
-            window.GC.team.schedule.init({
-                target: "#gc-schedule-widget-s3gt",
-                widgetId: id,
-                maxVerticalGamesVisible: 4
-            });
-        }
+        window.GC.team.schedule.init({
+            target: "#gc-schedule-widget-s3gt",
+            widgetId: widgetId,
+            maxVerticalGamesVisible: 4
+        });
 
         function exitKiosk() {
             window.open('', '_self').close();
             window.location.href = 'about:blank';
+        }
+
+        function goToChangeTeam() {
+            window.location.href = "file:///home/ash7631/change-team.html";
         }
     </script>
 </body>
