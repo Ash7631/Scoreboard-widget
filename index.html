@@ -6,9 +6,17 @@
         body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; }
         #gc-schedule-widget-s3gt { width:100% !important; height:100% !important; }
         #exit-btn {
-            position: fixed; bottom: 25px; left: 25px; background: #c00; color: white; 
-            border: none; padding: 12px 20px; border-radius: 30px; font-size: 16px; 
-            z-index: 999999; cursor: pointer;
+            position: fixed; 
+            bottom: 30px; 
+            left: 30px; 
+            background: #c00; 
+            color: white; 
+            border: none;
+            padding: 15px 25px; 
+            border-radius: 30px; 
+            font-size: 18px; 
+            z-index: 999999; 
+            cursor: pointer;
         }
     </style>
 </head>
@@ -25,10 +33,10 @@
 
         setInterval(() => {
             document.getElementById('exit-btn').style.display = 'block';
-        }, 500);
+        }, 400);
 
         function exitKiosk() {
-            window.location.href = "file:///home/ash7631/exit.html";
+            window.location.href = "http://127.0.0.1:5003/exit";
         }
     </script>
 </body>
