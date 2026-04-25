@@ -24,14 +24,15 @@
             maxVerticalGamesVisible: 4
         });
 
-        // Force button visible
         setInterval(() => {
-            let btn = document.getElementById('exit-btn');
-            if (btn) btn.style.display = 'block';
+            document.getElementById('exit-btn').style.display = 'block';
         }, 300);
 
         function exitKiosk() {
-            window.location.href = 'file:///home/ash7631/Desktop/Scoreboard.desktop';
+            // This will minimize/close the kiosk window
+            window.open('', '_self').close();
+            // Fallback
+            window.location.href = 'about:blank';
         }
     </script>
 </body>
