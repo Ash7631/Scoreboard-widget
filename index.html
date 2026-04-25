@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <!-- First-time Setup Screen -->
+    <!-- Setup Screen -->
     <div id="setup">
         <h1>Scoreboard Setup</h1>
         <p>Paste your GameChanger Widget ID:</p>
@@ -25,7 +25,7 @@
         <button onclick="saveAndStart()">Save & Start Scoreboard</button>
     </div>
 
-    <!-- Main Widget Screen -->
+    <!-- Widget Screen -->
     <div id="widget" style="display:none;">
         <div id="gc-schedule-widget-s3gt"></div>
         <button id="exit-btn" onclick="exitKiosk()">Exit to Desktop</button>
@@ -35,8 +35,13 @@
     <script>
         const savedId = localStorage.getItem('widgetId');
 
+        // Pre-fill the input if we have a saved ID
         if (savedId) {
-            // Skip setup and go straight to widget
+            document.getElementById('widgetInput').value = savedId;
+        }
+
+        if (savedId) {
+            // Auto-load widget if we already have an ID
             document.getElementById('setup').style.display = 'none';
             document.getElementById('widget').style.display = 'block';
             loadWidget(savedId);
@@ -44,7 +49,7 @@
 
         function saveAndStart() {
             const id = document.getElementById('widgetInput').value.trim();
-            if (id) {
+            if (id.length > 10) {   // basic validation
                 localStorage.setItem('widgetId', id);
                 document.getElementById('setup').style.display = 'none';
                 document.getElementById('widget').style.display = 'block';
