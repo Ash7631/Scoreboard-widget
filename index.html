@@ -2,13 +2,23 @@
 <html>
 <head>
     <title>Scoreboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; }
         #gc-schedule-widget-s3gt { width:100% !important; height:100% !important; }
         #exit-btn {
-            position: fixed; bottom: 30px; left: 30px; background: #c00; color: white; 
-            border: none; padding: 15px 25px; border-radius: 30px; font-size: 18px; 
-            z-index: 999999; cursor: pointer;
+            position: fixed; 
+            bottom: 25px; 
+            left: 25px; 
+            background: rgba(80,80,80,0.95); 
+            color: white; 
+            border: none;
+            padding: 12px 20px; 
+            border-radius: 30px; 
+            font-size: 16px; 
+            z-index: 999999; 
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
         }
     </style>
 </head>
@@ -20,15 +30,19 @@
     <script>
         window.GC.team.schedule.init({
             target: "#gc-schedule-widget-s3gt",
-            widgetId: "87a03322-bc62-45e4-aa6e-f2cc4310c481"
+            widgetId: "87a03322-bc62-45e4-aa6e-f2cc4310c481",
+            maxVerticalGamesVisible: 4
         });
 
+        // Keep button visible
         setInterval(() => {
-            document.getElementById('exit-btn').style.display = 'block';
+            let btn = document.getElementById('exit-btn');
+            if (btn) btn.style.display = 'block';
         }, 400);
 
         function exitKiosk() {
-            window.location.href = "file:///home/ash7631/exit.html";
+            window.open('', '_self').close();
+            window.location.href = 'about:blank';
         }
     </script>
 </body>
