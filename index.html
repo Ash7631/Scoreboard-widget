@@ -4,22 +4,13 @@
     <title>Scoreboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body, html { 
-            margin:0; 
-            padding:0; 
-            height:100%; 
-            background:black; 
-            overflow:hidden; 
-        }
-        #gc-schedule-widget-s3gt { 
-            width:100% !important; 
-            height:100% !important; 
-        }
+        body, html { margin:0; padding:0; height:100%; background:black; overflow:hidden; }
+        #gc-schedule-widget-s3gt { width:100% !important; height:100% !important; }
         #exit-btn {
             position: fixed; 
             bottom: 25px; 
             left: 25px; 
-            background: rgba(80,80,80,0.95); 
+            background: rgba(220,50,50,0.95); 
             color: white; 
             border: none;
             padding: 12px 20px; 
@@ -27,7 +18,7 @@
             font-size: 16px; 
             z-index: 999999; 
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.7);
         }
     </style>
 </head>
@@ -43,16 +34,13 @@
             maxVerticalGamesVisible: 4
         });
 
-        // Keep exit button visible no matter what
         setInterval(() => {
-            let btn = document.getElementById('exit-btn');
-            if (btn) btn.style.display = 'block';
-        }, 400);
+            document.getElementById('exit-btn').style.display = 'block';
+        }, 500);
 
         function exitKiosk() {
-            // Stronger exit from kiosk mode
-            window.open('', '_self').close();
-            window.location.href = 'about:blank';
+            // Best method for kiosk mode on Raspberry Pi
+            window.location.href = "about:blank";
         }
     </script>
 </body>
